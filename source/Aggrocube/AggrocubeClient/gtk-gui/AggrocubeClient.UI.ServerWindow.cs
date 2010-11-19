@@ -4,19 +4,178 @@ namespace AggrocubeClient.UI
 {
 	public partial class ServerWindow
 	{
+		private global::Gtk.VBox verticalBox;
+
+		private global::Gtk.Image menuImage;
+
+		private global::Gtk.ScrolledWindow scrolledWindow;
+
+		private global::Gtk.TextView serverList;
+
+		private global::Gtk.Table buttonTable;
+
+		private global::Gtk.HButtonBox leftButtonBox;
+
+		private global::Gtk.Button closeButton;
+
+		private global::Gtk.HButtonBox rightButtonBox;
+
+		private global::Gtk.Button serverButton;
+
+		private global::Gtk.Button joinButton;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
 			// Widget AggrocubeClient.UI.ServerWindow
 			this.Name = "AggrocubeClient.UI.ServerWindow";
-			this.Title = global::Mono.Unix.Catalog.GetString ("ServerWindow");
+			this.Title = global::Mono.Unix.Catalog.GetString ("Server Browser");
+			this.Icon = global::Stetic.IconLoader.LoadIcon (this, "gtk-network", global::Gtk.IconSize.Menu);
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			// Container child AggrocubeClient.UI.ServerWindow.Gtk.Container+ContainerChild
+			this.verticalBox = new global::Gtk.VBox ();
+			this.verticalBox.Name = "verticalBox";
+			this.verticalBox.Spacing = 6;
+			// Container child verticalBox.Gtk.Box+BoxChild
+			this.menuImage = new global::Gtk.Image ();
+			this.menuImage.Name = "menuImage";
+			this.menuImage.Xalign = 1f;
+			this.menuImage.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("AggrocubeClient.aggrocube.png");
+			this.verticalBox.Add (this.menuImage);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.verticalBox[this.menuImage]));
+			w1.Position = 0;
+			w1.Expand = false;
+			w1.Fill = false;
+			// Container child verticalBox.Gtk.Box+BoxChild
+			this.scrolledWindow = new global::Gtk.ScrolledWindow ();
+			this.scrolledWindow.CanFocus = true;
+			this.scrolledWindow.Name = "scrolledWindow";
+			this.scrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+			this.scrolledWindow.BorderWidth = ((uint)(5));
+			// Container child scrolledWindow.Gtk.Container+ContainerChild
+			this.serverList = new global::Gtk.TextView ();
+			this.serverList.CanFocus = true;
+			this.serverList.Name = "serverList";
+			this.serverList.Editable = false;
+			this.serverList.CursorVisible = false;
+			this.serverList.AcceptsTab = false;
+			this.scrolledWindow.Add (this.serverList);
+			this.verticalBox.Add (this.scrolledWindow);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.verticalBox[this.scrolledWindow]));
+			w3.Position = 1;
+			// Container child verticalBox.Gtk.Box+BoxChild
+			this.buttonTable = new global::Gtk.Table (((uint)(1)), ((uint)(2)), false);
+			this.buttonTable.Name = "buttonTable";
+			this.buttonTable.RowSpacing = ((uint)(6));
+			this.buttonTable.ColumnSpacing = ((uint)(6));
+			// Container child buttonTable.Gtk.Table+TableChild
+			this.leftButtonBox = new global::Gtk.HButtonBox ();
+			this.leftButtonBox.Name = "leftButtonBox";
+			this.leftButtonBox.BorderWidth = ((uint)(5));
+			this.leftButtonBox.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(3));
+			// Container child leftButtonBox.Gtk.ButtonBox+ButtonBoxChild
+			this.closeButton = new global::Gtk.Button ();
+			this.closeButton.CanFocus = true;
+			this.closeButton.Name = "closeButton";
+			this.closeButton.UseUnderline = true;
+			// Container child closeButton.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w4 = new global::Gtk.Alignment (0.5f, 0.5f, 0f, 0f);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w5 = new global::Gtk.HBox ();
+			w5.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w6 = new global::Gtk.Image ();
+			w6.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-cancel", global::Gtk.IconSize.Menu);
+			w5.Add (w6);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w8 = new global::Gtk.Label ();
+			w8.LabelProp = global::Mono.Unix.Catalog.GetString ("Close");
+			w8.UseUnderline = true;
+			w5.Add (w8);
+			w4.Add (w5);
+			this.closeButton.Add (w4);
+			this.leftButtonBox.Add (this.closeButton);
+			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.leftButtonBox[this.closeButton]));
+			w12.Expand = false;
+			w12.Fill = false;
+			this.buttonTable.Add (this.leftButtonBox);
+			global::Gtk.Table.TableChild w13 = ((global::Gtk.Table.TableChild)(this.buttonTable[this.leftButtonBox]));
+			w13.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child buttonTable.Gtk.Table+TableChild
+			this.rightButtonBox = new global::Gtk.HButtonBox ();
+			this.rightButtonBox.Name = "rightButtonBox";
+			this.rightButtonBox.Spacing = 5;
+			this.rightButtonBox.BorderWidth = ((uint)(5));
+			this.rightButtonBox.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			// Container child rightButtonBox.Gtk.ButtonBox+ButtonBoxChild
+			this.serverButton = new global::Gtk.Button ();
+			this.serverButton.CanFocus = true;
+			this.serverButton.Name = "serverButton";
+			this.serverButton.UseUnderline = true;
+			// Container child serverButton.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w14 = new global::Gtk.Alignment (0.5f, 0.5f, 0f, 0f);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w15 = new global::Gtk.HBox ();
+			w15.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w16 = new global::Gtk.Image ();
+			w16.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			w15.Add (w16);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w18 = new global::Gtk.Label ();
+			w18.LabelProp = global::Mono.Unix.Catalog.GetString ("Start server");
+			w18.UseUnderline = true;
+			w15.Add (w18);
+			w14.Add (w15);
+			this.serverButton.Add (w14);
+			this.rightButtonBox.Add (this.serverButton);
+			global::Gtk.ButtonBox.ButtonBoxChild w22 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.rightButtonBox[this.serverButton]));
+			w22.Expand = false;
+			w22.Fill = false;
+			// Container child rightButtonBox.Gtk.ButtonBox+ButtonBoxChild
+			this.joinButton = new global::Gtk.Button ();
+			this.joinButton.CanFocus = true;
+			this.joinButton.Name = "joinButton";
+			this.joinButton.UseUnderline = true;
+			// Container child joinButton.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w23 = new global::Gtk.Alignment (0.5f, 0.5f, 0f, 0f);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w24 = new global::Gtk.HBox ();
+			w24.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w25 = new global::Gtk.Image ();
+			w25.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-connect", global::Gtk.IconSize.Menu);
+			w24.Add (w25);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w27 = new global::Gtk.Label ();
+			w27.LabelProp = global::Mono.Unix.Catalog.GetString ("Join server");
+			w27.UseUnderline = true;
+			w24.Add (w27);
+			w23.Add (w24);
+			this.joinButton.Add (w23);
+			this.rightButtonBox.Add (this.joinButton);
+			global::Gtk.ButtonBox.ButtonBoxChild w31 = ((global::Gtk.ButtonBox.ButtonBoxChild)(this.rightButtonBox[this.joinButton]));
+			w31.Position = 1;
+			w31.Expand = false;
+			w31.Fill = false;
+			this.buttonTable.Add (this.rightButtonBox);
+			global::Gtk.Table.TableChild w32 = ((global::Gtk.Table.TableChild)(this.buttonTable[this.rightButtonBox]));
+			w32.LeftAttach = ((uint)(1));
+			w32.RightAttach = ((uint)(2));
+			w32.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.verticalBox.Add (this.buttonTable);
+			global::Gtk.Box.BoxChild w33 = ((global::Gtk.Box.BoxChild)(this.verticalBox[this.buttonTable]));
+			w33.Position = 2;
+			w33.Expand = false;
+			w33.Fill = false;
+			this.Add (this.verticalBox);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 400;
-			this.DefaultHeight = 300;
+			this.DefaultWidth = 491;
+			this.DefaultHeight = 439;
 			this.Show ();
+			this.closeButton.Clicked += new global::System.EventHandler (this.OnCloseButtonClicked);
 		}
 	}
 }

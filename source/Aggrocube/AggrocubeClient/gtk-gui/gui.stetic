@@ -357,6 +357,7 @@
                 <property name="Type">TextOnly</property>
                 <property name="Label" translatable="yes">Single-player</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonSingleClicked" />
               </widget>
               <packing>
                 <property name="Expand">False</property>
@@ -370,6 +371,7 @@
                 <property name="Type">TextOnly</property>
                 <property name="Label" translatable="yes">Multiplayer</property>
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonMultiClicked" />
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -414,12 +416,148 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="AggrocubeClient.UI.ServerWindow" design-size="400 300">
+  <widget class="Gtk.Window" id="AggrocubeClient.UI.ServerWindow" design-size="491 439">
     <property name="MemberName" />
-    <property name="Title" translatable="yes">ServerWindow</property>
+    <property name="Title" translatable="yes">Server Browser</property>
+    <property name="Icon">stock:gtk-network Menu</property>
     <property name="WindowPosition">CenterOnParent</property>
     <child>
-      <placeholder />
+      <widget class="Gtk.VBox" id="verticalBox">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.Image" id="menuImage">
+            <property name="MemberName" />
+            <property name="Xalign">1</property>
+            <property name="Pixbuf">resource:AggrocubeClient.aggrocube.png</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">False</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ScrolledWindow" id="scrolledWindow">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="ShadowType">In</property>
+            <property name="BorderWidth">5</property>
+            <child>
+              <widget class="Gtk.TextView" id="serverList">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Editable">False</property>
+                <property name="CursorVisible">False</property>
+                <property name="AcceptsTab">False</property>
+                <property name="Text" translatable="yes" />
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Table" id="buttonTable">
+            <property name="MemberName" />
+            <property name="NColumns">2</property>
+            <property name="RowSpacing">6</property>
+            <property name="ColumnSpacing">6</property>
+            <child>
+              <widget class="Gtk.HButtonBox" id="leftButtonBox">
+                <property name="MemberName" />
+                <property name="BorderWidth">5</property>
+                <property name="Size">1</property>
+                <property name="LayoutStyle">Start</property>
+                <child>
+                  <widget class="Gtk.Button" id="closeButton">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextAndIcon</property>
+                    <property name="Icon">stock:gtk-cancel Menu</property>
+                    <property name="Label" translatable="yes">Close</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnCloseButtonClicked" />
+                  </widget>
+                  <packing>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="AutoSize">True</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">True</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.HButtonBox" id="rightButtonBox">
+                <property name="MemberName" />
+                <property name="Spacing">5</property>
+                <property name="BorderWidth">5</property>
+                <property name="Size">2</property>
+                <property name="LayoutStyle">End</property>
+                <child>
+                  <widget class="Gtk.Button" id="serverButton">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextAndIcon</property>
+                    <property name="Icon">stock:gtk-add Menu</property>
+                    <property name="Label" translatable="yes">Start server</property>
+                    <property name="UseUnderline">True</property>
+                  </widget>
+                  <packing>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Button" id="joinButton">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextAndIcon</property>
+                    <property name="Icon">stock:gtk-connect Menu</property>
+                    <property name="Label" translatable="yes">Join server</property>
+                    <property name="UseUnderline">True</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="LeftAttach">1</property>
+                <property name="RightAttach">2</property>
+                <property name="AutoSize">True</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">True</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
     </child>
   </widget>
 </stetic-interface>

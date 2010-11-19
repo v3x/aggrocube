@@ -1,4 +1,5 @@
 using System;
+
 namespace AggrocubeClient.UI
 {
 	public partial class SettingsWindow : Gtk.Window

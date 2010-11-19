@@ -96,6 +96,8 @@ namespace AggrocubeClient.UI
 			this.DefaultWidth = 352;
 			this.DefaultHeight = 246;
 			this.Show ();
+			this.buttonSingle.Clicked += new global::System.EventHandler (this.OnButtonSingleClicked);
+			this.buttonMulti.Clicked += new global::System.EventHandler (this.OnButtonMultiClicked);
 			this.buttonSettings.Clicked += new global::System.EventHandler (this.OnButtonSettingsClicked);
 		}
 	}
