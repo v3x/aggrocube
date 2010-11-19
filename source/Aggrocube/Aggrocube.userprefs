@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AggrocubeClient/UI/SettingsWindow.cs" ctype="Workbench">
+    <Files>
+      <File FileName="AggrocubeClient/Main.cs" Line="15" Column="4" />
+      <File FileName="AggrocubeClient/UI/SettingsWindow.cs" Line="24" Column="1" />
+      <File FileName="AggrocubeClient/UI/MenuWindow.cs" Line="9" Column="26" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches ctype="PinnedWatchStore" />
+</Properties>
