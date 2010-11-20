@@ -26,6 +26,7 @@ namespace AggrocubeClient.UI
 			this.Title = global::Mono.Unix.Catalog.GetString ("Aggrocube");
 			this.Icon = global::Stetic.IconLoader.LoadIcon (this, "gtk-media-stop", global::Gtk.IconSize.Menu);
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.Resizable = false;
 			// Container child AggrocubeClient.UI.MenuWindow.Gtk.Container+ContainerChild
 			this.menuBox = new global::Gtk.VBox ();
 			this.menuBox.Name = "menuBox";
@@ -33,6 +34,7 @@ namespace AggrocubeClient.UI
 			// Container child menuBox.Gtk.Box+BoxChild
 			this.menuImage = new global::Gtk.Image ();
 			this.menuImage.Name = "menuImage";
+			this.menuImage.Xalign = 1f;
 			this.menuImage.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("AggrocubeClient.aggrocube.png");
 			this.menuBox.Add (this.menuImage);
 			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.menuBox[this.menuImage]));

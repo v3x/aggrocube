@@ -94,14 +94,15 @@
         <child>
           <widget class="Gtk.Frame" id="videoFrame">
             <property name="MemberName" />
-            <property name="ShadowType">In</property>
+            <property name="ShadowType">EtchedOut</property>
             <property name="BorderWidth">5</property>
             <child>
-              <widget class="Gtk.Alignment" id="GtkAlignment1">
+              <widget class="Gtk.Alignment" id="videoAlignment">
                 <property name="MemberName" />
                 <property name="Xalign">0</property>
                 <property name="Yalign">0</property>
                 <property name="LeftPadding">12</property>
+                <property name="BorderWidth">5</property>
                 <child>
                   <widget class="Gtk.Table" id="videoTable">
                     <property name="MemberName" />
@@ -115,14 +116,30 @@
                       <placeholder />
                     </child>
                     <child>
-                      <placeholder />
+                      <widget class="Gtk.Button" id="fullscreenButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextOnly</property>
+                        <property name="Label" translatable="yes">Windowed</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="AutoSize">False</property>
+                        <property name="YOptions">Fill</property>
+                        <property name="XExpand">True</property>
+                        <property name="XFill">True</property>
+                        <property name="XShrink">False</property>
+                        <property name="YExpand">False</property>
+                        <property name="YFill">True</property>
+                        <property name="YShrink">False</property>
+                      </packing>
                     </child>
                   </widget>
                 </child>
               </widget>
             </child>
             <child>
-              <widget class="Gtk.Label" id="GtkLabel1">
+              <widget class="Gtk.Label" id="videoLabel">
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">&lt;b&gt;Video&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
@@ -148,14 +165,15 @@
         <child>
           <widget class="Gtk.Frame" id="volumeFrame">
             <property name="MemberName" />
-            <property name="ShadowType">In</property>
+            <property name="ShadowType">EtchedOut</property>
             <property name="BorderWidth">5</property>
             <child>
-              <widget class="Gtk.Alignment" id="GtkAlignment">
+              <widget class="Gtk.Alignment" id="volumeAlignment">
                 <property name="MemberName" />
                 <property name="Xalign">0</property>
                 <property name="Yalign">0</property>
                 <property name="LeftPadding">12</property>
+                <property name="BorderWidth">5</property>
                 <child>
                   <widget class="Gtk.Table" id="volumeTable">
                     <property name="MemberName" />
@@ -166,6 +184,7 @@
                     <child>
                       <widget class="Gtk.Label" id="critterLabel">
                         <property name="MemberName" />
+                        <property name="Xalign">1</property>
                         <property name="LabelProp" translatable="yes">Critters</property>
                       </widget>
                       <packing>
@@ -211,6 +230,7 @@
                     <child>
                       <widget class="Gtk.Label" id="musicLabel">
                         <property name="MemberName" />
+                        <property name="Xalign">1</property>
                         <property name="LabelProp" translatable="yes">Music</property>
                       </widget>
                       <packing>
@@ -252,6 +272,7 @@
                     <child>
                       <widget class="Gtk.Label" id="soundLabel">
                         <property name="MemberName" />
+                        <property name="Xalign">1</property>
                         <property name="LabelProp" translatable="yes">Sounds</property>
                       </widget>
                       <packing>
@@ -328,6 +349,7 @@
     <property name="Title" translatable="yes">Aggrocube</property>
     <property name="Icon">stock:gtk-media-stop Menu</property>
     <property name="WindowPosition">CenterOnParent</property>
+    <property name="Resizable">False</property>
     <child>
       <widget class="Gtk.VBox" id="menuBox">
         <property name="MemberName" />
@@ -335,6 +357,7 @@
         <child>
           <widget class="Gtk.Image" id="menuImage">
             <property name="MemberName" />
+            <property name="Xalign">1</property>
             <property name="Pixbuf">resource:AggrocubeClient.aggrocube.png</property>
           </widget>
           <packing>

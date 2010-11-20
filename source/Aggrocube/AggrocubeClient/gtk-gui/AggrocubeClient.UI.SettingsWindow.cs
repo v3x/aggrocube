@@ -14,15 +14,17 @@ namespace AggrocubeClient.UI
 
 		private global::Gtk.Frame videoFrame;
 
-		private global::Gtk.Alignment GtkAlignment1;
+		private global::Gtk.Alignment videoAlignment;
 
 		private global::Gtk.Table videoTable;
 
-		private global::Gtk.Label GtkLabel1;
+		private global::Gtk.Button fullscreenButton;
+
+		private global::Gtk.Label videoLabel;
 
 		private global::Gtk.Frame volumeFrame;
 
-		private global::Gtk.Alignment GtkAlignment;
+		private global::Gtk.Alignment volumeAlignment;
 
 		private global::Gtk.Table volumeTable;
 
@@ -128,39 +130,50 @@ namespace AggrocubeClient.UI
 			// Container child settingsTable.Gtk.Table+TableChild
 			this.videoFrame = new global::Gtk.Frame ();
 			this.videoFrame.Name = "videoFrame";
-			this.videoFrame.ShadowType = ((global::Gtk.ShadowType)(1));
+			this.videoFrame.ShadowType = ((global::Gtk.ShadowType)(4));
 			this.videoFrame.BorderWidth = ((uint)(5));
 			// Container child videoFrame.Gtk.Container+ContainerChild
-			this.GtkAlignment1 = new global::Gtk.Alignment (0f, 0f, 1f, 1f);
-			this.GtkAlignment1.Name = "GtkAlignment1";
-			this.GtkAlignment1.LeftPadding = ((uint)(12));
-			// Container child GtkAlignment1.Gtk.Container+ContainerChild
+			this.videoAlignment = new global::Gtk.Alignment (0f, 0f, 1f, 1f);
+			this.videoAlignment.Name = "videoAlignment";
+			this.videoAlignment.LeftPadding = ((uint)(12));
+			this.videoAlignment.BorderWidth = ((uint)(5));
+			// Container child videoAlignment.Gtk.Container+ContainerChild
 			this.videoTable = new global::Gtk.Table (((uint)(3)), ((uint)(1)), false);
 			this.videoTable.Name = "videoTable";
 			this.videoTable.RowSpacing = ((uint)(6));
 			this.videoTable.ColumnSpacing = ((uint)(6));
-			this.GtkAlignment1.Add (this.videoTable);
-			this.videoFrame.Add (this.GtkAlignment1);
-			this.GtkLabel1 = new global::Gtk.Label ();
-			this.GtkLabel1.Name = "GtkLabel1";
-			this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Video</b>");
-			this.GtkLabel1.UseMarkup = true;
-			this.videoFrame.LabelWidget = this.GtkLabel1;
+			// Container child videoTable.Gtk.Table+TableChild
+			this.fullscreenButton = new global::Gtk.Button ();
+			this.fullscreenButton.CanFocus = true;
+			this.fullscreenButton.Name = "fullscreenButton";
+			this.fullscreenButton.UseUnderline = true;
+			this.fullscreenButton.Label = global::Mono.Unix.Catalog.GetString ("Windowed");
+			this.videoTable.Add (this.fullscreenButton);
+			global::Gtk.Table.TableChild w20 = ((global::Gtk.Table.TableChild)(this.videoTable[this.fullscreenButton]));
+			w20.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.videoAlignment.Add (this.videoTable);
+			this.videoFrame.Add (this.videoAlignment);
+			this.videoLabel = new global::Gtk.Label ();
+			this.videoLabel.Name = "videoLabel";
+			this.videoLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Video</b>");
+			this.videoLabel.UseMarkup = true;
+			this.videoFrame.LabelWidget = this.videoLabel;
 			this.settingsTable.Add (this.videoFrame);
-			global::Gtk.Table.TableChild w22 = ((global::Gtk.Table.TableChild)(this.settingsTable[this.videoFrame]));
-			w22.LeftAttach = ((uint)(1));
-			w22.RightAttach = ((uint)(2));
-			w22.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w23 = ((global::Gtk.Table.TableChild)(this.settingsTable[this.videoFrame]));
+			w23.LeftAttach = ((uint)(1));
+			w23.RightAttach = ((uint)(2));
+			w23.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child settingsTable.Gtk.Table+TableChild
 			this.volumeFrame = new global::Gtk.Frame ();
 			this.volumeFrame.Name = "volumeFrame";
-			this.volumeFrame.ShadowType = ((global::Gtk.ShadowType)(1));
+			this.volumeFrame.ShadowType = ((global::Gtk.ShadowType)(4));
 			this.volumeFrame.BorderWidth = ((uint)(5));
 			// Container child volumeFrame.Gtk.Container+ContainerChild
-			this.GtkAlignment = new global::Gtk.Alignment (0f, 0f, 1f, 1f);
-			this.GtkAlignment.Name = "GtkAlignment";
-			this.GtkAlignment.LeftPadding = ((uint)(12));
-			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			this.volumeAlignment = new global::Gtk.Alignment (0f, 0f, 1f, 1f);
+			this.volumeAlignment.Name = "volumeAlignment";
+			this.volumeAlignment.LeftPadding = ((uint)(12));
+			this.volumeAlignment.BorderWidth = ((uint)(5));
+			// Container child volumeAlignment.Gtk.Container+ContainerChild
 			this.volumeTable = new global::Gtk.Table (((uint)(3)), ((uint)(2)), false);
 			this.volumeTable.Name = "volumeTable";
 			this.volumeTable.RowSpacing = ((uint)(6));
@@ -168,13 +181,14 @@ namespace AggrocubeClient.UI
 			// Container child volumeTable.Gtk.Table+TableChild
 			this.critterLabel = new global::Gtk.Label ();
 			this.critterLabel.Name = "critterLabel";
+			this.critterLabel.Xalign = 1f;
 			this.critterLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Critters");
 			this.volumeTable.Add (this.critterLabel);
-			global::Gtk.Table.TableChild w23 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.critterLabel]));
-			w23.TopAttach = ((uint)(2));
-			w23.BottomAttach = ((uint)(3));
-			w23.XOptions = ((global::Gtk.AttachOptions)(4));
-			w23.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w24 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.critterLabel]));
+			w24.TopAttach = ((uint)(2));
+			w24.BottomAttach = ((uint)(3));
+			w24.XOptions = ((global::Gtk.AttachOptions)(4));
+			w24.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child volumeTable.Gtk.Table+TableChild
 			this.CritterSlider = new global::Gtk.HScale (null);
 			this.CritterSlider.CanFocus = true;
@@ -186,20 +200,21 @@ namespace AggrocubeClient.UI
 			this.CritterSlider.Digits = 0;
 			this.CritterSlider.ValuePos = ((global::Gtk.PositionType)(1));
 			this.volumeTable.Add (this.CritterSlider);
-			global::Gtk.Table.TableChild w24 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.CritterSlider]));
-			w24.TopAttach = ((uint)(2));
-			w24.BottomAttach = ((uint)(3));
-			w24.LeftAttach = ((uint)(1));
-			w24.RightAttach = ((uint)(2));
-			w24.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w25 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.CritterSlider]));
+			w25.TopAttach = ((uint)(2));
+			w25.BottomAttach = ((uint)(3));
+			w25.LeftAttach = ((uint)(1));
+			w25.RightAttach = ((uint)(2));
+			w25.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child volumeTable.Gtk.Table+TableChild
 			this.musicLabel = new global::Gtk.Label ();
 			this.musicLabel.Name = "musicLabel";
+			this.musicLabel.Xalign = 1f;
 			this.musicLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Music");
 			this.volumeTable.Add (this.musicLabel);
-			global::Gtk.Table.TableChild w25 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.musicLabel]));
-			w25.XOptions = ((global::Gtk.AttachOptions)(4));
-			w25.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w26 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.musicLabel]));
+			w26.XOptions = ((global::Gtk.AttachOptions)(4));
+			w26.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child volumeTable.Gtk.Table+TableChild
 			this.musicSlider = new global::Gtk.HScale (null);
 			this.musicSlider.CanFocus = true;
@@ -211,20 +226,21 @@ namespace AggrocubeClient.UI
 			this.musicSlider.Digits = 0;
 			this.musicSlider.ValuePos = ((global::Gtk.PositionType)(1));
 			this.volumeTable.Add (this.musicSlider);
-			global::Gtk.Table.TableChild w26 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.musicSlider]));
-			w26.LeftAttach = ((uint)(1));
-			w26.RightAttach = ((uint)(2));
-			w26.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w27 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.musicSlider]));
+			w27.LeftAttach = ((uint)(1));
+			w27.RightAttach = ((uint)(2));
+			w27.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child volumeTable.Gtk.Table+TableChild
 			this.soundLabel = new global::Gtk.Label ();
 			this.soundLabel.Name = "soundLabel";
+			this.soundLabel.Xalign = 1f;
 			this.soundLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Sounds");
 			this.volumeTable.Add (this.soundLabel);
-			global::Gtk.Table.TableChild w27 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.soundLabel]));
-			w27.TopAttach = ((uint)(1));
-			w27.BottomAttach = ((uint)(2));
-			w27.XOptions = ((global::Gtk.AttachOptions)(4));
-			w27.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w28 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.soundLabel]));
+			w28.TopAttach = ((uint)(1));
+			w28.BottomAttach = ((uint)(2));
+			w28.XOptions = ((global::Gtk.AttachOptions)(4));
+			w28.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child volumeTable.Gtk.Table+TableChild
 			this.soundSlider = new global::Gtk.HScale (null);
 			this.soundSlider.CanFocus = true;
@@ -236,22 +252,22 @@ namespace AggrocubeClient.UI
 			this.soundSlider.Digits = 0;
 			this.soundSlider.ValuePos = ((global::Gtk.PositionType)(1));
 			this.volumeTable.Add (this.soundSlider);
-			global::Gtk.Table.TableChild w28 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.soundSlider]));
-			w28.TopAttach = ((uint)(1));
-			w28.BottomAttach = ((uint)(2));
-			w28.LeftAttach = ((uint)(1));
-			w28.RightAttach = ((uint)(2));
-			w28.YOptions = ((global::Gtk.AttachOptions)(4));
-			this.GtkAlignment.Add (this.volumeTable);
-			this.volumeFrame.Add (this.GtkAlignment);
+			global::Gtk.Table.TableChild w29 = ((global::Gtk.Table.TableChild)(this.volumeTable[this.soundSlider]));
+			w29.TopAttach = ((uint)(1));
+			w29.BottomAttach = ((uint)(2));
+			w29.LeftAttach = ((uint)(1));
+			w29.RightAttach = ((uint)(2));
+			w29.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.volumeAlignment.Add (this.volumeTable);
+			this.volumeFrame.Add (this.volumeAlignment);
 			this.volumeLabel = new global::Gtk.Label ();
 			this.volumeLabel.Name = "volumeLabel";
 			this.volumeLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Volume</b>");
 			this.volumeLabel.UseMarkup = true;
 			this.volumeFrame.LabelWidget = this.volumeLabel;
 			this.settingsTable.Add (this.volumeFrame);
-			global::Gtk.Table.TableChild w31 = ((global::Gtk.Table.TableChild)(this.settingsTable[this.volumeFrame]));
-			w31.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w32 = ((global::Gtk.Table.TableChild)(this.settingsTable[this.volumeFrame]));
+			w32.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.Add (this.settingsTable);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
