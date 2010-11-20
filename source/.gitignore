@@ -1,10 +1,10 @@
-*.pidb 
-*.resources 
-*.userprefs 
+*.pidb
+*.resources
+*.userprefs
 *.usertasks
-test-results
-bin
+test-results/
+bin/
 *.suo
 *.user
-obj
+obj/
 
