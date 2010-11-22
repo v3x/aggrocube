@@ -84,4 +84,10 @@
   <ItemGroup>
     <Folder Include="UI\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AggrocubeCommon\AggrocubeCommon.csproj">
+      <Project>{6E13BC75-2D95-499B-B944-CEB5479F2B9B}</Project>
+      <Name>AggrocubeCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

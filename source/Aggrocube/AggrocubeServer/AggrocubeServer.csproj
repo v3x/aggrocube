@@ -32,4 +32,13 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\AggrocubeCommon\AggrocubeCommon.csproj">
+      <Project>{6E13BC75-2D95-499B-B944-CEB5479F2B9B}</Project>
+      <Name>AggrocubeCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
 </Project>

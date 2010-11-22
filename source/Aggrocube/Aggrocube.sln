@@ -7,7 +7,7 @@ Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "Packages", "Packages.mdproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AggrocubeServer", "AggrocubeServer\AggrocubeServer.csproj", "{96EB0495-9FE7-464B-8797-EE6627B8BFD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AggrocubeCommon", "AggrocubeCommon\AggrocubeCommon.csproj", "{092983E0-11EF-4F13-9836-78C2DB01BF9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AggrocubeCommon", "AggrocubeCommon\AggrocubeCommon.csproj", "{6E13BC75-2D95-499B-B944-CEB5479F2B9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{092983E0-11EF-4F13-9836-78C2DB01BF9E}.Debug|x86.ActiveCfg = Debug|x86
-		{092983E0-11EF-4F13-9836-78C2DB01BF9E}.Debug|x86.Build.0 = Debug|x86
-		{092983E0-11EF-4F13-9836-78C2DB01BF9E}.Release|x86.ActiveCfg = Release|x86
-		{092983E0-11EF-4F13-9836-78C2DB01BF9E}.Release|x86.Build.0 = Release|x86
+		{6E13BC75-2D95-499B-B944-CEB5479F2B9B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E13BC75-2D95-499B-B944-CEB5479F2B9B}.Debug|x86.Build.0 = Debug|Any CPU
+		{6E13BC75-2D95-499B-B944-CEB5479F2B9B}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E13BC75-2D95-499B-B944-CEB5479F2B9B}.Release|x86.Build.0 = Release|Any CPU
 		{96EB0495-9FE7-464B-8797-EE6627B8BFD2}.Debug|x86.ActiveCfg = Debug|x86
 		{96EB0495-9FE7-464B-8797-EE6627B8BFD2}.Debug|x86.Build.0 = Debug|x86
 		{96EB0495-9FE7-464B-8797-EE6627B8BFD2}.Release|x86.ActiveCfg = Release|x86
