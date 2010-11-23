@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="UI\MenuWindow.cs" />
     <Compile Include="UI\ServerWindow.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="gtk-gui\AggrocubeClient.UI.ServerWindow.cs" />
     <Compile Include="gtk-gui\AggrocubeClient.UI.SettingsWindow.cs" />
     <Compile Include="UI\RenderWindow.cs" />
+    <Compile Include="Aggrocube.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.desktop">
