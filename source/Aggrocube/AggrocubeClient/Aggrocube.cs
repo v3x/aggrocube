@@ -1,27 +1,33 @@
 using System;
 using Gtk;
 using AggrocubeClient.UI;
+using AggrocubeCommon.Logging;
 
 namespace AggrocubeClient
 {
 	class AggrocubeClient
 	{
-		public AggrocubeClient() {
+		private OperatingSystem os;
+		private PlatformID platform_id;
+		
+		public AggrocubeClient() 
+		{
 			Application.Init();
 			
-			Console.WriteLine("Started Aggrocube " + DateTime.Now);
+			os = Environment.OSVersion;
+			platform_id = os.Platform;
+			
+			Log.WriteConsole("Started Aggrocube on " + platform_id);
 			MenuWindow menuWindow = new MenuWindow();
 			menuWindow.Show();
 			
-			Application.Run ();
+			Application.Run();
 		}
 		
 		public static void Main (string[] args)
 		{	
 			new AggrocubeClient();
 		}
-		
 	}
-	
 }
 
