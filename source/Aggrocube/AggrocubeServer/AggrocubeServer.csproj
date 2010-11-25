@@ -42,4 +42,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="AggrocubeServer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
 </Project>

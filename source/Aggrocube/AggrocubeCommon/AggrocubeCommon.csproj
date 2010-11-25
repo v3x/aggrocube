@@ -52,6 +52,7 @@
     <Compile Include="Items\Types\Tools\Hoe.cs" />
     <Compile Include="Items\Types\Tools\Pickaxe.cs" />
     <Compile Include="Items\Types\Tools\Shovel.cs" />
+    <Compile Include="Items\Types\ToolType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Blocks\" />
