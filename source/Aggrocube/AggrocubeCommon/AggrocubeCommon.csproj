@@ -46,6 +46,12 @@
     <Compile Include="Critters\ICritter.cs" />
     <Compile Include="Critters\Types\Player.cs" />
     <Compile Include="Logging\Log.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\IItem.cs" />
+    <Compile Include="Items\Types\Tools\Axe.cs" />
+    <Compile Include="Items\Types\Tools\Hoe.cs" />
+    <Compile Include="Items\Types\Tools\Pickaxe.cs" />
+    <Compile Include="Items\Types\Tools\Shovel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Blocks\" />
@@ -54,6 +60,12 @@
     <Folder Include="Critters\" />
     <Folder Include="Critters\Types\" />
     <Folder Include="Logging\" />
+    <Folder Include="Items\Types\" />
+    <Folder Include="Items\Types\Tools\" />
+    <Folder Include="Items\Types\" />
+    <Folder Include="Items\Types\" />
+    <Folder Include="Items\Types\" />
+    <Folder Include="Items\Types\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
