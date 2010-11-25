@@ -1,8 +1,8 @@
 using System;
 using Gtk;
+using System.Threading;
 using AggrocubeClient.UI;
 using AggrocubeCommon.Logging;
-
 namespace AggrocubeClient
 {
 	class AggrocubeClient

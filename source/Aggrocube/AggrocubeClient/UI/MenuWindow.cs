@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace AggrocubeClient.UI
 {
@@ -6,10 +7,9 @@ namespace AggrocubeClient.UI
 	{
 		protected virtual void OnButtonSingleClicked (object sender, System.EventArgs e)
 		{
-			using(RenderWindow renderWindow = new RenderWindow())
-            {
-                renderWindow.Run(30.0);
-            }
+			Thread renderThread = new Thread(new ThreadStart(RenderWindow.Create));
+			renderThread.Start();
+			this.Visible = false;
 		}
 		
 		protected virtual void OnButtonMultiClicked (object sender, System.EventArgs e)
