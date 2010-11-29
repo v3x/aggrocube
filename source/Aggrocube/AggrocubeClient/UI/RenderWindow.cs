@@ -8,13 +8,17 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using AggrocubeCommon.Blocks;
+using AggrocubeCommon.Critters;
+
 namespace AggrocubeClient.UI
 {
 	public class RenderWindow : GameWindow
 	{
 		private Matrix4 cameraMatrix;
         private float rotationSpeed = 0.15f;
+        private float movementSpeed = 5f;
 
+        //TODO: Any benefits to using Vector2 here?
         private Point currentCursor;
         private Point previousCursor;
         private Point deltaCursor;
@@ -29,13 +33,16 @@ namespace AggrocubeClient.UI
         System.Windows.Forms.Cursor myCursor;
 
         List<Block> blockList = new List<Block>();
-		
+
+        // The player of the client
+        Player player = new Player(CritterType.PLAYER, new Vector3(10, 0, 10));
+
 		public RenderWindow(string windowTitle, int resHorizontal, int resVertical) 
 			: base(resHorizontal, resVertical, GraphicsMode.Default, windowTitle)
-		{
+		{            
             myCursor = new System.Windows.Forms.Cursor(bitmap.GetHicon());
 
-            this.WindowState = WindowState.Fullscreen;
+            //this.WindowState = WindowState.Fullscreen;
             previousCursor = currentCursor = System.Windows.Forms.Cursor.Position;
 
             textureXInterval = (1.0 / (textureBitmap.Width / textureSize));
@@ -78,8 +85,6 @@ namespace AggrocubeClient.UI
         {
             base.OnLoad(e);
 
-
-            cameraMatrix = Matrix4.CreateTranslation(0f, 0f, 0f);
             GL.ClearColor(0.4f, 0.7f, 0.4f, 0.0f);
             GL.Enable(EnableCap.Texture2D);
             GL.Enable(EnableCap.DepthTest);
@@ -112,25 +117,44 @@ namespace AggrocubeClient.UI
             if (Keyboard[Key.Escape])
             {
                 Exit();
-            }
-            else if (Keyboard[Key.W])
+            }            
+            if (Keyboard[Key.W])
             {
-                cameraMatrix = Matrix4.Mult(cameraMatrix, Matrix4.CreateTranslation(0f, 0f, 10f * (float)e.Time));
+                player.Location += new Vector3(
+                    (float)Math.Cos(player.Yaw) * movementSpeed * (float)e.Time,  //X movement
+                    0,                                                            //Y movement
+                    (float)Math.Sin(player.Yaw) * movementSpeed * (float)e.Time); //Z movement
+
+                //player.Location.Y += (float)Math.Sin(myCharacter.pitch) * movementSpeed * (float)e.Time;
             }
-            else if (Keyboard[Key.S])
+            if (Keyboard[Key.S])
             {
-                cameraMatrix = Matrix4.Mult(cameraMatrix, Matrix4.CreateTranslation(0f, 0f, -10f * (float)e.Time));
+                player.Location -= new Vector3(
+                    (float)Math.Cos(player.Yaw) * movementSpeed * (float)e.Time,  //X movement
+                    0,                                                            //Y movement
+                    (float)Math.Sin(player.Yaw) * movementSpeed * (float)e.Time); //Z movement
+                
+                //player.Location.Y -= (float)Math.Sin(player.Pitch) * movementSpeed * (float)e.Time;
             }
-            else if (Keyboard[Key.A])
+            if (Keyboard[Key.A])
             {
-                cameraMatrix = Matrix4.Mult(cameraMatrix, Matrix4.CreateTranslation(10f * (float)e.Time, 0f, 0f));
+                player.Location -= new Vector3(
+                    (float)Math.Cos(player.Yaw + Math.PI / 2) * movementSpeed * (float)e.Time,
+                    0,
+                    (float)Math.Sin(player.Yaw + Math.PI / 2) * movementSpeed * (float)e.Time);
             }
-            else if (Keyboard[Key.D])
+            if (Keyboard[Key.D])
             {
-                cameraMatrix = Matrix4.Mult(cameraMatrix, Matrix4.CreateTranslation(-10f * (float)e.Time, 0f, 0f));
+                player.Location += new Vector3(
+                    (float)Math.Cos(player.Yaw + Math.PI / 2) * movementSpeed * (float)e.Time,
+                    0,
+                    (float)Math.Sin(player.Yaw + Math.PI / 2) * movementSpeed * (float)e.Time);
             }
 
             UpdateCursorPosition(e);
+
+            Vector3 lookatPoint = new Vector3((float)Math.Cos(player.Yaw), player.Pitch, (float)Math.Sin(player.Yaw));
+            cameraMatrix = Matrix4.LookAt(player.Location, player.Location + lookatPoint, Vector3.UnitY);
 
         }
 
@@ -139,9 +163,19 @@ namespace AggrocubeClient.UI
             currentCursor = System.Windows.Forms.Cursor.Position;
             deltaCursor = new Point(currentCursor.X - previousCursor.X, currentCursor.Y - previousCursor.Y);
 
-            cameraMatrix = Matrix4.Mult(cameraMatrix, Matrix4.CreateRotationY(deltaCursor.X * rotationSpeed * (float)e.Time));
-            cameraMatrix = Matrix4.Mult(cameraMatrix, Matrix4.CreateRotationX(deltaCursor.Y * rotationSpeed * (float)e.Time));
-            
+            player.Yaw += deltaCursor.X * rotationSpeed * (float)e.Time;
+            player.Pitch -= deltaCursor.Y * rotationSpeed * (float)e.Time;
+
+            //TODO: Need to allow looking straight up and looking straight down without slowing down pitch movement...bind for now
+            //if (player.Pitch > 3f)
+            //{
+            //    player.Pitch = 3f;
+            //}
+            //else if (player.Pitch < -3f)
+            //{
+            //    player.Pitch = -3f;
+            //}
+
             Rectangle cursorBounds = new Rectangle(Bounds.X + 20, Bounds.Y + 20, Bounds.Width - 40, Bounds.Height - 40);
             if (!cursorBounds.Contains(currentCursor))
             {      

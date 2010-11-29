@@ -1,10 +1,14 @@
 using System;
+using OpenTK;
+
 namespace AggrocubeCommon.Critters
 {
 	public abstract class Critter : ICritter
 	{
 		private CritterType type;
-		private int x, y, z;
+		private Vector3 location;
+        private float pitch;
+        private float yaw;
 		
 		public CritterType Type 
 		{ 
@@ -18,40 +22,52 @@ namespace AggrocubeCommon.Critters
 			}
 		}
 		
-		public int X 
+		public Vector3 Location 
 		{ 
 			get 
 			{ 
-				return x; 
+				return location; 
 			}
+            set
+            {
+                location = value;
+            }
 		}
-		
-		public int Y 
-		{ 
-			get 
-			{ 
-				return y; 
-			}
-		}
-		
-		public int Z 
-		{ 
-			get 
-			{ 
-				return z;
-			} 
-		}
+
+        public float Pitch
+        {
+            get
+            {
+                return pitch;
+            }
+            set
+            {
+                pitch = value;
+            }
+        }
+
+        public float Yaw
+        {
+            get
+            {
+                return yaw;
+            }
+            set
+            {
+                yaw = value;
+            }
+        }
 		
 		public Critter () 
 		{
 		}
 		
-		public Critter (CritterType type, int x, int y, int z) 
+		public Critter (CritterType type, Vector3 location) 
 		{
 			this.type = type;
-			this.x = x;
-			this.y = y;
-			this.z = z;
+            this.location = location;
+            pitch = 0f;
+            yaw = 0f;
 		}
 	}
 }

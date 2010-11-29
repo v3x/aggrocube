@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,6 +30,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -52,20 +53,6 @@
     <Compile Include="Items\Types\Tools\Hoe.cs" />
     <Compile Include="Items\Types\Tools\Pickaxe.cs" />
     <Compile Include="Items\Types\Tools\Shovel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Blocks\" />
-    <Folder Include="Blocks\Types\" />
-    <Folder Include="Items\" />
-    <Folder Include="Critters\" />
-    <Folder Include="Critters\Types\" />
-    <Folder Include="Logging\" />
-    <Folder Include="Items\Types\" />
-    <Folder Include="Items\Types\Tools\" />
-    <Folder Include="Items\Types\" />
-    <Folder Include="Items\Types\" />
-    <Folder Include="Items\Types\" />
-    <Folder Include="Items\Types\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
