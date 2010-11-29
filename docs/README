@@ -1,8 +1,0 @@
-Aggrocube is a multiplayer dynamically-generated cube-based world to create and explore.
-
-To compile the sources, the following is recommended:
-
-- Mono 2.8 (http://www.mono-project.com)
-- MonoDevelop 2.4 (http://www.monodevelop.com)
-- OpenTK from SVN trunk (http://www.opentk.com)
-
