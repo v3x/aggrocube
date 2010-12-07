@@ -34,10 +34,20 @@ namespace AggrocubeClient.UI
 
         List<Block> blockList = new List<Block>();
 
-        VirtualBufferObject myCube;
+        VertexBufferObject myBlock;
+
+        int IndexBufferID;
+        int[] Indices = new int[] {
+                                    0, 1, 2, 3, // Face 1 (Front)
+                                    4, 5, 6, 7, // Face 2 (Back)
+                                    7, 6, 1, 0, // Face 3 (Left)
+                                    3, 2, 5, 4, // Face 4 (Right)
+                                    1, 6, 7, 2, // Face 5 (Top)
+                                    7, 0, 3, 4  // Face 6 (Bottom)
+                                 };
 
         // The player of the client
-        Player player = new Player(CritterType.PLAYER, new Vector3(10, 0, 10));
+        Player player = new Player(CritterType.PLAYER, new Vector3(0, 0, 0));
 
 		public RenderWindow(string windowTitle, int resHorizontal, int resVertical) 
 			: base(resHorizontal, resVertical, GraphicsMode.Default, windowTitle)
@@ -87,9 +97,14 @@ namespace AggrocubeClient.UI
         {
             base.OnLoad(e);
 
+            //TODO: Most of the blocks will use the same indices buffer...need to allow for special cases in torches, etc.
+            GL.GenBuffers(1, out IndexBufferID);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, IndexBufferID);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(Indices.Length * sizeof(int)), Indices, BufferUsageHint.StaticDraw);
+
             //Load our vertex buffers here...hopefully we can do it elsewhere too...
-            Dirt dirt = new Dirt(0, -2, 0);
-            myCube = CreateVBO(dirt);
+            Dirt dirt = new Dirt(0, 0, -5);
+            myBlock = LoadVBO(dirt);
 
             GL.ClearColor(0.4f, 0.7f, 0.4f, 0.0f);
             GL.Enable(EnableCap.Texture2D);
@@ -129,7 +144,7 @@ namespace AggrocubeClient.UI
             {
                 player.Location += new Vector3(
                     (float)Math.Cos(player.Yaw) * movementSpeed * (float)e.Time,  //X movement
-                    0,                                                            //Y movement
+                    (float)Math.Sin(player.Pitch) * movementSpeed * (float)e.Time,                                                            //Y movement
                     (float)Math.Sin(player.Yaw) * movementSpeed * (float)e.Time); //Z movement
 
                 //player.Location.Y += (float)Math.Sin(myCharacter.pitch) * movementSpeed * (float)e.Time;
@@ -138,7 +153,7 @@ namespace AggrocubeClient.UI
             {
                 player.Location -= new Vector3(
                     (float)Math.Cos(player.Yaw) * movementSpeed * (float)e.Time,  //X movement
-                    0,                                                            //Y movement
+                    (float)Math.Sin(player.Pitch) * movementSpeed * (float)e.Time,                                                            //Y movement
                     (float)Math.Sin(player.Yaw) * movementSpeed * (float)e.Time); //Z movement
                 
                 //player.Location.Y -= (float)Math.Sin(player.Pitch) * movementSpeed * (float)e.Time;
@@ -174,14 +189,14 @@ namespace AggrocubeClient.UI
             player.Pitch -= deltaCursor.Y * rotationSpeed * (float)e.Time;
 
             //TODO: Need to allow looking straight up and looking straight down without slowing down pitch movement...bind for now
-            //if (player.Pitch > 3f)
-            //{
-            //    player.Pitch = 3f;
-            //}
-            //else if (player.Pitch < -3f)
-            //{
-            //    player.Pitch = -3f;
-            //}
+            if (player.Pitch > 3f)
+            {
+                player.Pitch = 3f;
+            }
+            else if (player.Pitch < -3f)
+            {
+                player.Pitch = -3f;
+            }
 
             Rectangle cursorBounds = new Rectangle(Bounds.X + 20, Bounds.Y + 20, Bounds.Width - 40, Bounds.Height - 40);
             if (!cursorBounds.Contains(currentCursor))
@@ -208,7 +223,7 @@ namespace AggrocubeClient.UI
             //    DrawBlock(block);
             //}
 
-            DrawVBO(myCube);
+            DrawVBO(myBlock);
 
             SwapBuffers();
 
@@ -216,13 +231,88 @@ namespace AggrocubeClient.UI
             System.Windows.Forms.Cursor.Current = myCursor;
         }
 
-        private void DrawBlock(Block block)
-        {
-            DrawBlock(block.X, block.Y, block.Z, block.Type);
-        }
+        //private void DrawBlock(Block block)
+        //{
+        //    DrawBlock(block.X, block.Y, block.Z, block.Type);
+        //}
 
-		private void DrawBlock(float x, float y, float z, BlockType blockType)
+        //private void DrawBlock(float x, float y, float z, BlockType blockType)
+        //{
+        //int textureLocationX = (int)blockType % (textureBitmap.Width / textureSize); //The X position of the texture in the bitmap.
+        //int textureLocationY = (int)blockType / (textureBitmap.Width / textureSize); //The Y position of the texture in the bitmap
+
+        //double textureLeft = (double)textureLocationX * textureXInterval; //The relative position of the left side of the texture in the bitmap
+        //double textureRight = textureLeft + textureXInterval; //The relative position of the right side of the texture in the bitmap
+
+        //double textureBottom = (double)textureLocationY * textureYInterval; //The relative position of the bottom side of the texture in the bitmap
+        //double textureTop = textureBottom + textureYInterval; //The relative position of the top side of the texture in the bitmap           
+
+        //    GL.BindTexture(TextureTarget.Texture2D, textureID);
+        //   // GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest); //Don't blur the pixels
+        //    GL.Begin(BeginMode.Quads);
+
+        //    //Face 1 (Front)
+        //    GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y - 0.5, z + 0.5);
+        //    GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y + 0.5, z + 0.5);
+        //    GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y + 0.5, z + 0.5);
+        //    GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y - 0.5, z + 0.5);
+
+        //    //Face 2 (Back)
+        //    GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x + 0.5, y - 0.5, z - 0.5);
+        //    GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x + 0.5, y + 0.5, z - 0.5);
+        //    GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x - 0.5, y + 0.5, z - 0.5);
+        //    GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x - 0.5, y - 0.5, z - 0.5);
+
+        //    //Face 3 (Left)
+        //    GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y - 0.5, z - 0.5);
+        //    GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y + 0.5, z - 0.5);
+        //    GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x - 0.5, y + 0.5, z + 0.5);
+        //    GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x - 0.5, y - 0.5, z + 0.5);
+
+        //    //Face 4 (Right)
+        //    GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x + 0.5, y - 0.5, z + 0.5);
+        //    GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x + 0.5, y + 0.5, z + 0.5);
+        //    GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y + 0.5, z - 0.5);
+        //    GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y - 0.5, z - 0.5);
+
+        //    //Face 5 (Top)
+        //    GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y + 0.5, z + 0.5);
+        //    GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y + 0.5, z - 0.5);
+        //    GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y + 0.5, z - 0.5);
+        //    GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y + 0.5, z + 0.5);
+
+        //    //Face 6 (Bottom)
+        //    GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y - 0.5, z - 0.5);
+        //    GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y - 0.5, z + 0.5);
+        //    GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y - 0.5, z + 0.5);
+        //    GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y - 0.5, z - 0.5);
+
+        //    GL.End();
+
+        //    GL.BindTexture(TextureTarget.Texture2D, 0);
+        //}
+
+        // This will create a VBO for each block, but how will we change it after creating it? Keep a list of all VBO objects?
+        // Right now we are putting the indices into the buffer with each block...we really only need one indices VBO for basic blocks.
+        // Also, take Vertices out of Block.cs and put it in here...generate it based on the block coordinates. When chunks are implemented, base it on those.
+        // Still need to do texture...want to generate a texture VBO based on blocktype.
+        private VertexBufferObject LoadVBO(Block block)
         {
+            VertexBufferObject vbo = new VertexBufferObject();
+
+            //Generate vertex coordinates based on block location
+            Vector3[] Vertices = new Vector3[] { 
+                                                    new Vector3(block.X - 0.5f, block.Y - 0.5f, block.Z + 0.5f), // Vector 0
+                                                    new Vector3(block.X - 0.5f, block.Y + 0.5f, block.Z + 0.5f), // Vector 1
+                                                    new Vector3(block.X + 0.5f, block.Y + 0.5f, block.Z + 0.5f), // Vector 2
+                                                    new Vector3(block.X + 0.5f, block.Y - 0.5f, block.Z + 0.5f), // Vector 3
+                                                    new Vector3(block.X + 0.5f, block.Y - 0.5f, block.Z - 0.5f), // Vector 4
+                                                    new Vector3(block.X + 0.5f, block.Y + 0.5f, block.Z - 0.5f), // Vector 5
+                                                    new Vector3(block.X - 0.5f, block.Y + 0.5f, block.Z - 0.5f), // Vector 6
+                                                    new Vector3(block.X - 0.5f, block.Y - 0.5f, block.Z - 0.5f)  // Vector 7
+                                                };
+
+            //Generate texture coordinates based on block type
             int textureLocationX = (int)blockType % (textureBitmap.Width / textureSize); //The X position of the texture in the bitmap.
             int textureLocationY = (int)blockType / (textureBitmap.Width / textureSize); //The Y position of the texture in the bitmap
 
@@ -232,94 +322,37 @@ namespace AggrocubeClient.UI
             double textureBottom = (double)textureLocationY * textureYInterval; //The relative position of the bottom side of the texture in the bitmap
             double textureTop = textureBottom + textureYInterval; //The relative position of the top side of the texture in the bitmap           
 
-            GL.BindTexture(TextureTarget.Texture2D, textureID);
-           // GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)All.Nearest); //Don't blur the pixels
-            GL.Begin(BeginMode.Quads);
+            Vector2[] Textures = new Vector2[] {
+                                                    
+            };
 
-            //Face 1 (Front)
-            GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y - 0.5, z + 0.5);
-            GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y + 0.5, z + 0.5);
-            GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y + 0.5, z + 0.5);
-            GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y - 0.5, z + 0.5);
+            //Generate buffer IDs
+            GL.GenBuffers(1, out vbo.VertexBufferID);            
+            GL.GenBuffers(1, out vbo.TextureBufferID);
+            //GL.GenBuffers(1, out IndexBufferID);
 
-            //Face 2 (Back)
-            GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x + 0.5, y - 0.5, z - 0.5);
-            GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x + 0.5, y + 0.5, z - 0.5);
-            GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x - 0.5, y + 0.5, z - 0.5);
-            GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x - 0.5, y - 0.5, z - 0.5);
-
-            //Face 3 (Left)
-            GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y - 0.5, z - 0.5);
-            GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y + 0.5, z - 0.5);
-            GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x - 0.5, y + 0.5, z + 0.5);
-            GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x - 0.5, y - 0.5, z + 0.5);
-
-            //Face 4 (Right)
-            GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x + 0.5, y - 0.5, z + 0.5);
-            GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x + 0.5, y + 0.5, z + 0.5);
-            GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y + 0.5, z - 0.5);
-            GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y - 0.5, z - 0.5);
-
-            //Face 5 (Top)
-            GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y + 0.5, z + 0.5);
-            GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y + 0.5, z - 0.5);
-            GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y + 0.5, z - 0.5);
-            GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y + 0.5, z + 0.5);
-
-            //Face 6 (Bottom)
-            GL.TexCoord2(textureLeft, textureBottom);  GL.Vertex3(x - 0.5, y - 0.5, z - 0.5);
-            GL.TexCoord2(textureLeft, textureTop);     GL.Vertex3(x - 0.5, y - 0.5, z + 0.5);
-            GL.TexCoord2(textureRight, textureTop);    GL.Vertex3(x + 0.5, y - 0.5, z + 0.5);
-            GL.TexCoord2(textureRight, textureBottom); GL.Vertex3(x + 0.5, y - 0.5, z - 0.5);
-
-            GL.End();
-		}
-
-        // This will create a VBO for each block, but how will we change it after creating it? Keep a list of all VBO objects?
-        // Right now we are putting the indices into the buffer with each block...we really only need one indices VBO for basic blocks.
-        // Also, take Vertices out of Block.cs and put it in here...generate it based on the block coordinates. When chunks are implemented, base it on those.
-        // Still need to do texture...want to generate a texture VBO based on blocktype.
-        private VirtualBufferObject CreateVBO(Block block)
-        {
-            VirtualBufferObject vbo = new VirtualBufferObject();
-
-            // Generate buffer for vertices
-            GL.GenBuffers(1, out vbo.VertexBufferID);
+            //Bind the vertices
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.VertexBufferID);
-            GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(block.Vertices.Length * Vector3.SizeInBytes), block.Vertices, BufferUsageHint.DynamicDraw);
-           
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0); //Clear binding
+            GL.BufferData(BufferTarget.ArrayBuffer, (IntPtr)(Vertices.Length * Vector3.SizeInBytes), Vertices, BufferUsageHint.DynamicDraw);
 
-            //Generate buffer for indices
-            GL.GenBuffers(1, out vbo.ElementBufferID);
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, vbo.ElementBufferID);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(block.Indices.Length * sizeof(int)), block.Indices, BufferUsageHint.StaticDraw);
-
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
-
-            vbo.NumElements = block.Indices.Length;
+            //Bind the indices
+            //GL.BindBuffer(BufferTarget.ElementArrayBuffer, IndexBufferID);
+            //GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(Indices.Length * sizeof(int)), Indices, BufferUsageHint.StaticDraw);
 
             return vbo;
         }
 
-        private void DrawVBO(VirtualBufferObject vbo)
+        private void DrawVBO(VertexBufferObject vbo)
         {
-            //Look up what this does :P
-            GL.PushClientAttrib(ClientAttribMask.ClientVertexArrayBit);
-
-            // Bindings for vertices
+            // Bindings for drawing vertices
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo.VertexBufferID);
             GL.VertexPointer(3, VertexPointerType.Float, Vector3.SizeInBytes, IntPtr.Zero);
-            GL.EnableClientState(EnableCap.VertexArray);
+            GL.EnableClientState(ArrayCap.VertexArray);
 
-            //Bindings for indices
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, vbo.ElementBufferID);
+            // Bindings for indices
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, IndexBufferID);
 
-            //Draw vertices as directed by indices
-
-            GL.DrawElements(BeginMode.Quads, vbo.NumElements, DrawElementsType.UnsignedInt, IntPtr.Zero);
-
-            GL.PopClientAttrib();
+            GL.DrawElements(BeginMode.Quads, Indices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
         }
 		
 		public static void Create() 
@@ -331,11 +364,12 @@ namespace AggrocubeClient.UI
 		}
 	}
 
-    struct VirtualBufferObject
+    struct VertexBufferObject
     {
         public int VertexBufferID;   // Holds the buffer id to the vertices
-        public int ElementBufferID;  // Holds the buffer id to the indices
-        public int NumElements;      // Number of elements to be drawn...for block it's just 24. Probably need to change this for torches, etc.
+        public int TextureBufferID;
+        //public int ElementBufferID;  // Holds the buffer id to the indices
+        //public int NumElements;      // Number of elements to be drawn...for block it's just 24. Probably need to change this for torches, etc.
     }
 }
 
